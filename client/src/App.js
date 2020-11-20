@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ReactMapGL from "react-map-gl";
+import ReactMapGL, {Marker} from "react-map-gl";
 import './App.css';
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
       {...viewport}
       mapboxApiAccessToken={""}
       /* {process.env.REACT_APP_MAPBOX_TOKEN} <= not reading the .env .  */
+      mapStyle="mapbox://styles/liskac/ckhkommsp0a8x19l9i10ihn7x"
       onViewportChange={viewport => {
         setViewport(viewport);
       }}
