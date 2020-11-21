@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactMapGL, {Marker} from "react-map-gl";
+import * as fireData from "./data/FIRE_FACILITY_WGS84.json"; //want to have this in the server instead
 import './App.css';
 
 function App() {
@@ -22,7 +23,10 @@ function App() {
         setViewport(viewport);
       }}
       >
-        markers here
+    <Marker
+    latitude={45}
+    longitude={-75}
+    >Fire</Marker>
       </ReactMapGL>
     </div>
   );
