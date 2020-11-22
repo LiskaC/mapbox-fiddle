@@ -3,6 +3,9 @@ import ReactMapGL, {Marker} from "react-map-gl";
 import * as fireData from "./data/FIRE_FACILITY_WGS84.json"; //want to have this in the server instead
 import './App.css';
 import './styles/Marker.css';
+import './styles/Icon.css';
+import './styles/Marker-Button.css';
+import fireIcon from "./assets/fire-icon.jpg";
 
 function App() {
   const [viewport, setViewport] = useState({
@@ -13,6 +16,9 @@ function App() {
     zoom: 10,
     position: "center"
   })
+
+  const [selectedPark, setSelectedPark] = useState(null);
+
   return (
     <div className="App">
       <p>maaaap</p>
@@ -27,15 +33,23 @@ function App() {
       >
 
 
-{fireData.default.map((i) => {
-  console.log([i][0])
+{fireData.default.map((park) => {
   return <Marker
-  key={[i]}
-  latitude={[i][0][1]}
-  longitude={[i][0][0]}
-  className="marker"
+  key={[park]}
+  latitude={[park][0][1]}
+  longitude={[park][0][0]}
   offsetTop={-25}
-  />
+  > 
+  
+  <button className="marker-btn" onClick={(e) => {
+    e.preventDefault();
+    setSelectedPark(park)
+    console.log(selectedPark)
+  }}>
+    <img src={fireIcon} alt="FIRESTATION" className="icon" />
+  </button>
+
+  </Marker>
 })}
       </ReactMapGL>
     </div>
