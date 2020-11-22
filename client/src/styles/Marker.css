@@ -1,0 +1,7 @@
+.marker {
+	background-image: url("../assets/fire-icon.jpg");
+	background-size: cover;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+}
