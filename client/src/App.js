@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import ReactMapGL, {Marker} from "react-map-gl";
+import React, { useState} from "react";
+import ReactMapGL, {Marker, Popup} from "react-map-gl";
 import * as fireData from "./data/FIRE_FACILITY_WGS84.json"; //want to have this in the server instead
 import './App.css';
 import './styles/Marker.css';
@@ -17,7 +17,8 @@ function App() {
     position: "center"
   })
 
-  const [selectedPark, setSelectedPark] = useState(null);
+  const [selectedFirehouse, setSelectedFirehouse] = useState(null);
+
 
   return (
     <div className="App">
@@ -33,24 +34,45 @@ function App() {
       >
 
 
-{fireData.default.map((park) => {
+{fireData.default.map((location) => {
   return <Marker
-  key={[park]}
-  latitude={[park][0][1]}
-  longitude={[park][0][0]}
+  key={[location]}
+  latitude={[location][0][1]}
+  longitude={[location][0][0]}
   offsetTop={-25}
   > 
   
   <button className="marker-btn" onClick={(e) => {
     e.preventDefault();
-    setSelectedPark(park)
-    console.log(selectedPark)
+    setSelectedFirehouse(location)
+    console.log(selectedFirehouse[0])
   }}>
     <img src={fireIcon} alt="FIRESTATION" className="icon" />
   </button>
 
   </Marker>
 })}
+
+
+
+{selectedFirehouse ? (
+  <Popup
+  latitude={selectedFirehouse[1]}
+  longitude={selectedFirehouse[0]}
+  offsetTop={-25}
+  onClose={() => {
+    setSelectedFirehouse(null)
+  }}
+  >
+<div>
+  <h2>Firehouse</h2>
+  <p>latitude: {selectedFirehouse[1]}</p>
+  <p>longitude: {selectedFirehouse[0]}</p>
+</div>
+  </Popup>
+) : null}
+
+
       </ReactMapGL>
     </div>
   );
